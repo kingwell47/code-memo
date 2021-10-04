@@ -1,0 +1,62 @@
+@use "./functions" as fnc;
+
+:root {
+}
+
+html {
+  font-size: 100%;
+  box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+  font-size: fnc.rem(16);
+  line-height: 1.1;
+}
+
+a,
+a:hover,
+a:active {
+  text-decoration: none;
+}
+
+.container {
+  padding: 0 fnc.rem(24);
+
+  @include fnc.breakpoint-up(large) {
+    padding: 0;
+  }
+}
+
+.limit-wrapper {
+  max-width: fnc.rem(1440);
+  margin: 0 auto;
+
+  @include fnc.breakpoint-down(small) {
+    overflow: hidden;
+  }
+}
+
+h1,
+h2,
+h3,
+h4,
+p {
+  margin: 0;
+}
+
+img {
+  display: block;
+}
+
+.App {
+  width: min(100vw, 1440px);
+  overflow: hidden;
+}
