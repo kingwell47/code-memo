@@ -2,7 +2,12 @@ import React, { useState } from "react";
 
 function Test() {
   const [passcode, setPasscode] = useState();
-  const [notes, setNotes] = useState([{}]);
+  const [notes, setNotes] = useState([
+    {
+      label: "this is a label",
+      text: "this is the content",
+    },
+  ]);
 
   return (
     <div>
@@ -24,9 +29,9 @@ function Test() {
       <div>
         <p>Display</p>
         <br />
-        <h3>Heading</h3>
+        <h3>{notes.label}</h3>
         <br />
-        <p>Content</p>
+        <p>{notes.text}</p>
       </div>
     </div>
   );
