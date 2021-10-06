@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 
 function Test() {
   const [passcode, setPasscode] = useState();
+  const [randomCode, setRandomCode] = useState();
   const [notes, setNotes] = useState([
     {
       label: "this is a label",
@@ -9,12 +10,32 @@ function Test() {
     },
   ]);
 
+  const inputRef = useRef();
+
+  const getRandomCode = () => {
+    setRandomCode(Math.floor(Math.random() * 999999));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setPasscode(inputRef.current.value);
+    getRandomCode();
+    e.target.reset();
+  };
+
   return (
     <div>
-      <div>
-        Passcode:
-        <input type='number' maxLength='6' placeholder='number here' />
-      </div>
+      <form onSubmit={(e) => handleSubmit(e)}>
+        <label htmlFor='passcode'> Passcode:</label>
+        <input
+          type='number'
+          maxLength='6'
+          placeholder='number here'
+          htmlFor='passcode'
+          ref={inputRef}
+        />
+        <input type='submit' value='Set Passcode' />
+      </form>
       <br />
       <div>
         Note Heading
@@ -27,11 +48,12 @@ function Test() {
       </div>
       <br />
       <div>
-        <p>Display</p>
+        <p>{passcode}</p>
+        <p>{randomCode}</p>
         <br />
-        <h3>{notes.label}</h3>
+        <h3>{notes[0].label}</h3>
         <br />
-        <p>{notes.text}</p>
+        <p>{notes[0].text}</p>
       </div>
     </div>
   );
