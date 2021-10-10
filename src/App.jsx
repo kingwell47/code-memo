@@ -1,10 +1,11 @@
 import GetPasscode from "./components/GetPasscode";
+import NoteList from "./components/NoteList";
 
 function App() {
   return (
     <div className='App'>
-      <h1>Hello World</h1>
       <GetPasscode />
+      <NoteList />
     </div>
   );
 }
