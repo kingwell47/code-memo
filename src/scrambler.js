@@ -1,18 +1,39 @@
 //scrambler should scramble all the text in the note, no matter the passcode given
 
-export default function scrambler(word, number) {
+export function scrambler(word, number) {
   const min = 33;
   const max = 126;
 
   const leftOver = number % (max - min);
 
   return word.replace(/[^\s]/g, (x) => {
-    let result = 0;
-    if (x.charCodeAt(0) - leftOver < min) {
-      result = max - (min - (x.charCodeAt(0) - leftOver + 1));
+    let diff = 0;
+    let currentVal = x.charCodeAt(0);
+    if (currentVal + leftOver > max) {
+      diff = min + currentVal + leftOver - max;
     } else {
-      result = x.charCodeAt(0) - leftOver;
+      diff = currentVal + leftOver;
     }
-    return String.fromCharCode(result);
+
+    return String.fromCharCode(diff);
+  });
+}
+
+export function unScrambler(word, number) {
+  const min = 33;
+  const max = 126;
+
+  const leftOver = number % (max - min);
+
+  return word.replace(/[^\s]/g, (x) => {
+    let diff = 0;
+    let currentVal = x.charCodeAt(0);
+    if (currentVal - leftOver < min) {
+      diff = max - (min - (currentVal - leftOver));
+    } else {
+      diff = currentVal - leftOver;
+    }
+
+    return String.fromCharCode(diff);
   });
 }

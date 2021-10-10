@@ -1,10 +1,10 @@
-import Test from "./components/Test";
+import GetPasscode from "./components/GetPasscode";
 
 function App() {
   return (
     <div className='App'>
       <h1>Hello World</h1>
-      <Test />
+      <GetPasscode />
     </div>
   );
 }

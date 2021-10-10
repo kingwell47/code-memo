@@ -1,11 +1,13 @@
 import React, { useState, useRef } from "react";
-import scrambler from "../scrambler";
+import { scrambler, unScrambler } from "../scrambler";
 
 function Test() {
   const [passcode, setPasscode] = useState();
   const [randomCode, setRandomCode] = useState();
   const [testState, setTestState] = useState("");
   const [scrambledState, setScrambledState] = useState("");
+  const [test2State, setTest2State] = useState("");
+  const [scrambled2State, setScrambled2State] = useState("");
   const [notes, setNotes] = useState([
     {
       label: "this is a label",
@@ -32,9 +34,19 @@ function Test() {
     setTestState(e.target.value);
   };
 
+  const handle2Change = (e) => {
+    setTest2State(e.target.value);
+  };
+
   const scrambleText = () => {
     if (!randomCode) return;
     setScrambledState(scrambler(testState, Math.abs(passcode - randomCode)));
+  };
+  const unScrambleText = () => {
+    if (!randomCode) return;
+    setScrambled2State(
+      unScrambler(test2State, Math.abs(passcode - randomCode))
+    );
   };
 
   return (
@@ -72,6 +84,10 @@ function Test() {
         <input type='text' onChange={(e) => handleChange(e)} />
         <p>{scrambledState}</p>
         <button onClick={scrambleText}>Scramble</button>
+        <br />
+        <input type='text' onChange={(e) => handle2Change(e)} />
+        <p>{scrambled2State}</p>
+        <button onClick={unScrambleText}>UnScramble</button>
       </div>
     </div>
   );
