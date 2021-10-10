@@ -1,6 +1,6 @@
 import React, { useState, useRef } from "react";
 
-function Note({ note, onEditNote }) {
+function Note({ note, onEditNote, onDeleteNote }) {
   const [editing, setEditing] = useState(false);
 
   const titleRef = useRef();
@@ -42,7 +42,7 @@ function Note({ note, onEditNote }) {
           </div>
           <h3>{note.title}</h3>
           <p>{note.text}</p>
-          <button>Delete Note</button>
+          <button onClick={() => onDeleteNote(note.id)}>Delete Note</button>
           <button onClick={() => setEditing(true)}>Edit Note</button>
         </div>
       )}

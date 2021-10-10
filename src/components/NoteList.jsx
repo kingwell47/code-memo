@@ -35,6 +35,10 @@ function NoteList() {
     setNotes(allNotes);
   };
 
+  const onDeleteNote = (idToDelete) => {
+    setNotes(notes.filter((note) => note.id !== idToDelete));
+  };
+
   return (
     <div>
       <h1>Notes</h1>
@@ -58,7 +62,12 @@ function NoteList() {
         </div>
       )}
       {notes.map((note) => (
-        <Note note={note} key={note.id} onEditNote={onEditNote} />
+        <Note
+          note={note}
+          key={note.id}
+          onEditNote={onEditNote}
+          onDeleteNote={onDeleteNote}
+        />
       ))}
     </div>
   );
