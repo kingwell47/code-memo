@@ -1,6 +1,7 @@
 import React, { useState, useRef } from "react";
+import { unScrambler } from "../scrambler";
 
-function Note({ note, onEditNote, onDeleteNote }) {
+function Note({ note, onEditNote, onDeleteNote, keyNumber }) {
   const [editing, setEditing] = useState(false);
 
   const titleRef = useRef();
@@ -22,13 +23,13 @@ function Note({ note, onEditNote, onDeleteNote }) {
             type='text'
             name='newNote'
             id=''
-            defaultValue={note.title}
+            defaultValue={unScrambler(note.title, keyNumber)}
           />
           <textarea
             ref={textRef}
             name='newNote'
             id=''
-            defaultValue={note.text}
+            defaultValue={unScrambler(note.text, keyNumber)}
           />
           <button onClick={submitEdit}>Submit Edit</button>
         </div>
@@ -40,8 +41,8 @@ function Note({ note, onEditNote, onDeleteNote }) {
               minute: "2-digit",
             })}
           </div>
-          <h3>{note.title}</h3>
-          <p>{note.text}</p>
+          <h3>{unScrambler(note.title, keyNumber)}</h3>
+          <p>{unScrambler(note.text, keyNumber)}</p>
           <button onClick={() => onDeleteNote(note.id)}>Delete Note</button>
           <button onClick={() => setEditing(true)}>Edit Note</button>
         </div>

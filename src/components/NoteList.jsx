@@ -2,19 +2,19 @@ import React, { useState, useRef } from "react";
 import { nanoid } from "nanoid";
 import Note from "./Note";
 import { useLocalStorage } from "../useStorage";
+import { scrambler } from "../scrambler";
 
 function NoteList({ passCode, randomCode }) {
   const [notes, setNotes] = useLocalStorage("notes", []);
   const [addingNote, setAddingNote] = useState(false);
-
   const titleRef = useRef();
   const textRef = useRef();
 
   const onAddNote = () => {
     let newNote = {
       id: nanoid(),
-      title: titleRef.current.value,
-      text: textRef.current.value,
+      title: scrambler(titleRef.current.value, Math.abs(passCode - randomCode)),
+      text: scrambler(textRef.current.value, Math.abs(passCode - randomCode)),
       date: Date.now(),
     };
 
@@ -29,8 +29,8 @@ function NoteList({ passCode, randomCode }) {
     const toEditIndex = allNotes.map((item) => item.id).indexOf(id);
     const toEdit = {
       id: id,
-      title: newTitle,
-      text: newText,
+      title: scrambler(newTitle, Math.abs(passCode - randomCode)),
+      text: scrambler(newText, Math.abs(passCode - randomCode)),
       date: Date.now(),
     };
     allNotes[toEditIndex] = toEdit;
@@ -67,6 +67,7 @@ function NoteList({ passCode, randomCode }) {
         <Note
           note={note}
           key={note.id}
+          keyNumber={Math.abs(passCode - randomCode)}
           onEditNote={onEditNote}
           onDeleteNote={onDeleteNote}
         />

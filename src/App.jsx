@@ -12,17 +12,20 @@ function App() {
   };
 
   return (
-    <div className='App'>
-      <GetPasscode
-        passCode={passCode}
-        setPassCode={setPassCode}
-        removePassCode={removePassCode}
-        randomCode={randomCode}
-        getRandomCode={getRandomCode}
-        removeRandomCode={removeRandomCode}
-      />
-      <NoteList passCode={passCode} randomCode={randomCode} />
-    </div>
+    <main className='App'>
+      {passCode ? (
+        <NoteList passCode={passCode} randomCode={randomCode} />
+      ) : (
+        <GetPasscode
+          passCode={passCode}
+          setPassCode={setPassCode}
+          removePassCode={removePassCode}
+          randomCode={randomCode}
+          getRandomCode={getRandomCode}
+          removeRandomCode={removeRandomCode}
+        />
+      )}
+    </main>
   );
 }
 
