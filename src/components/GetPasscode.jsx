@@ -1,22 +1,23 @@
 import React, { useState } from "react";
+import { useSessionStorage, useLocalStorage } from "../useStorage";
 
 //Passcode should scramble the data before setting it in local storage
 //Should also probably add disclaimer that this app should not be used for secure details because it's open source and thus any scrambling I do can be reverse engineered
 
-function GetPasscode() {
-  const [passCode, setPassCode] = useState("");
+function GetPasscode({
+  passCode,
+  setPassCode,
+  removePassCode,
+  randomCode,
+  getRandomCode,
+  removeRandomCode,
+}) {
   const [displayCode, setDisplayCode] = useState("");
-  const [randomCode, setRandomCode] = useState("");
 
   let digits = [];
   for (let i = 0; i <= 9; i++) {
     digits = [...digits, i];
   }
-
-  const getRandomCode = () => {
-    if (randomCode) return;
-    setRandomCode(Math.floor(Math.random() * 999999));
-  };
 
   const handleClick = (e) => {
     if (displayCode.length > 5) return;
@@ -38,6 +39,11 @@ function GetPasscode() {
     setDisplayCode("");
   };
 
+  const handleReset = () => {
+    removePassCode();
+    removeRandomCode();
+  };
+
   return (
     <div>
       <p>{displayCode}</p>
@@ -51,6 +57,7 @@ function GetPasscode() {
         ))}
         <button onClick={handleDelete}>Del</button>
         <button onClick={handleSubmit}>Submit</button>
+        <button onClick={handleReset}>Reset</button>
       </div>
     </div>
   );

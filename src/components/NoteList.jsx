@@ -1,9 +1,10 @@
 import React, { useState, useRef } from "react";
 import { nanoid } from "nanoid";
 import Note from "./Note";
+import { useLocalStorage } from "../useStorage";
 
-function NoteList() {
-  const [notes, setNotes] = useState([]);
+function NoteList({ passCode, randomCode }) {
+  const [notes, setNotes] = useLocalStorage("notes", []);
   const [addingNote, setAddingNote] = useState(false);
 
   const titleRef = useRef();
@@ -24,13 +25,14 @@ function NoteList() {
   };
 
   const onEditNote = (id, newTitle, newText) => {
-    let allNotes = [...notes];
+    const allNotes = [...notes];
     const toEditIndex = allNotes.map((item) => item.id).indexOf(id);
-    let toEdit = notes.filter((item) => item.id === id);
-    toEdit.id = id;
-    toEdit.title = newTitle;
-    toEdit.text = newText;
-    toEdit.date = Date.now();
+    const toEdit = {
+      id: id,
+      title: newTitle,
+      text: newText,
+      date: Date.now(),
+    };
     allNotes[toEditIndex] = toEdit;
     setNotes(allNotes);
   };
