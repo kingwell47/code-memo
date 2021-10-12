@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "./GetPasscode.scss";
 
 //Passcode should scramble the data before setting it in local storage
 //Should also probably add disclaimer that this app should not be used for secure details because it's open source and thus any scrambling I do can be reverse engineered
@@ -11,7 +12,7 @@ function GetPasscode({
 }) {
   const [displayCode, setDisplayCode] = useState("");
 
-  let digits = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
+  let digits = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
   const handleClick = (e) => {
     if (displayCode.length > 5) return;
@@ -40,17 +41,40 @@ function GetPasscode({
 
   return (
     <section className='keypad'>
-      <p>{displayCode}</p>
-      <div>
+      <input
+        className='keypad__display'
+        type='password'
+        name=''
+        id=''
+        value={displayCode}
+        disabled
+      />
+      <div className='keypad__keys'>
         {digits.map((digit) => (
-          <button value={digit} key={digit} onClick={(e) => handleClick(e)}>
+          <button
+            className='keypad__key'
+            value={digit}
+            key={digit}
+            onClick={(e) => handleClick(e)}>
             {digit}
           </button>
         ))}
-        <button onClick={handleDelete}>Del</button>
-        <button onClick={handleSubmit}>Submit</button>
-        <button onClick={handleReset}>Reset</button>
+        <button className='keypad__key delete' onClick={handleDelete}>
+          Del
+        </button>
+        <button
+          className='keypad__key zero'
+          value='0'
+          onClick={(e) => handleClick(e)}>
+          0
+        </button>
+        <button className='keypad__key submit' onClick={handleSubmit}>
+          Submit
+        </button>
       </div>
+      <button className='keypad__reset' onClick={handleReset}>
+        Reset
+      </button>
     </section>
   );
 }

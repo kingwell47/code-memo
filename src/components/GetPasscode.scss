@@ -1,1 +1,41 @@
 @use "../functions" as fnc;
+
+.keypad {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  &__display {
+  }
+
+  &__keys {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    grid-template-areas:
+      "number number number"
+      "number number number"
+      "number number number"
+      "delete zero submit";
+  }
+
+  &__key {
+    grid-area: "number";
+
+    &.zero {
+      grid-area: "zero";
+    }
+
+    &.delete {
+      grid-area: "delete";
+    }
+
+    &.submit {
+      grid-area: "submit";
+    }
+  }
+
+  &__reset {
+  }
+}
