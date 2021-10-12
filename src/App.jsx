@@ -14,13 +14,15 @@ function App() {
   return (
     <main className='App'>
       {passCode ? (
-        <NoteList passCode={passCode} randomCode={randomCode} />
+        <NoteList
+          passCode={passCode}
+          randomCode={randomCode}
+          removePassCode={removePassCode}
+        />
       ) : (
         <GetPasscode
-          passCode={passCode}
           setPassCode={setPassCode}
           removePassCode={removePassCode}
-          randomCode={randomCode}
           getRandomCode={getRandomCode}
           removeRandomCode={removeRandomCode}
         />

@@ -4,7 +4,7 @@ import Note from "./Note";
 import { useLocalStorage } from "../useStorage";
 import { scrambler } from "../scrambler";
 
-function NoteList({ passCode, randomCode }) {
+function NoteList({ passCode, randomCode, removePassCode }) {
   const [notes, setNotes] = useLocalStorage("notes", []);
   const [addingNote, setAddingNote] = useState(false);
   const titleRef = useRef();
@@ -45,6 +45,7 @@ function NoteList({ passCode, randomCode }) {
     <div>
       <h1>Notes</h1>
       <button onClick={() => setAddingNote(true)}>New Note</button>
+      <button onClick={removePassCode}>Log-out</button>
       {addingNote && (
         <div>
           <input
