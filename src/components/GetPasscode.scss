@@ -5,7 +5,10 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding-top: fnc.rem(24);
+  border: fnc.rem(3) solid var(--color-primary-600);
+  border-radius: fnc.rem(15);
+  padding: fnc.rem(24);
+  background-color: var(--color-primary-700);
 
   &__display {
     background-color: var(--color-primary-600);
@@ -29,7 +32,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: fnc.rem(100);
+    width: fnc.rem(90);
     aspect-ratio: 2.5;
     border-radius: 50%;
     background-color: var(--color-primary-100);

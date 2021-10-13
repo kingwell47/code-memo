@@ -15,36 +15,50 @@ function Note({ note, onEditNote, onDeleteNote, keyNumber }) {
   };
 
   return (
-    <div>
+    <div className='notes__note'>
       {editing ? (
-        <div>
+        <div className='notes__note_editing'>
           <input
             ref={titleRef}
+            className='notes__note_editing_title'
             type='text'
             name='newNote'
-            id=''
             defaultValue={unScrambler(note.title, keyNumber)}
           />
           <textarea
             ref={textRef}
+            className='notes__note_editing_text'
             name='newNote'
-            id=''
             defaultValue={unScrambler(note.text, keyNumber)}
           />
-          <button onClick={submitEdit}>Submit Edit</button>
+          <button className='notes__button submit' onClick={submitEdit}>
+            Submit Edit
+          </button>
         </div>
       ) : (
-        <div>
-          <div>
+        <div className='notes__note_content'>
+          <div className='notes__note_date'>
             {new Date(note.date).toLocaleDateString("en-US", {
               hour: "2-digit",
               minute: "2-digit",
             })}
           </div>
-          <h3>{unScrambler(note.title, keyNumber)}</h3>
-          <p>{unScrambler(note.text, keyNumber)}</p>
-          <button onClick={() => onDeleteNote(note.id)}>Delete Note</button>
-          <button onClick={() => setEditing(true)}>Edit Note</button>
+          <h3 className='notes__note_title'>
+            {unScrambler(note.title, keyNumber)}
+          </h3>
+          <p className='notes__note_text'>
+            {unScrambler(note.text, keyNumber)}
+          </p>
+          <button
+            className='notes__button delete'
+            onClick={() => onDeleteNote(note.id)}>
+            Delete Note
+          </button>
+          <button
+            className='notes__button edit'
+            onClick={() => setEditing(true)}>
+            Edit Note
+          </button>
         </div>
       )}
     </div>

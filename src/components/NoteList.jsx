@@ -3,6 +3,7 @@ import { nanoid } from "nanoid";
 import Note from "./Note";
 import { useLocalStorage } from "../useStorage";
 import { scrambler } from "../scrambler";
+import "./NoteList.scss";
 
 function NoteList({ passCode, randomCode, removePassCode }) {
   const [notes, setNotes] = useLocalStorage("notes", []);
@@ -42,26 +43,39 @@ function NoteList({ passCode, randomCode, removePassCode }) {
   };
 
   return (
-    <div>
-      <h1>Notes</h1>
-      <button onClick={() => setAddingNote(true)}>New Note</button>
-      <button onClick={removePassCode}>Log-out</button>
+    <section className='notes'>
+      <div className='notes__topbar'>
+        <h1 className='notes__title'>Code Memo</h1>
+        <button className='notes__button logout' onClick={removePassCode}>
+          Log-out
+        </button>
+      </div>
+      <div className='notes__underbar'>
+        <h2 className='notes__subtitle'>Notes</h2>
+        <button
+          className='notes__button new'
+          onClick={() => setAddingNote(true)}>
+          +
+        </button>
+      </div>
       {addingNote && (
-        <div>
+        <div className='notes__note_input_wrapper'>
           <input
             ref={titleRef}
+            className='notes__note_input_title'
             type='text'
             name='newNote'
-            id=''
             placeholder='Put title here...'
           />
           <textarea
             ref={textRef}
+            className='notes__note_input_text'
             name='newNote'
-            id=''
             placeholder='Put text here...'
           />
-          <button onClick={onAddNote}>Add Note</button>
+          <button className='notes__button add' onClick={onAddNote}>
+            Add Note
+          </button>
         </div>
       )}
       {notes.map((note) => (
@@ -73,7 +87,7 @@ function NoteList({ passCode, randomCode, removePassCode }) {
           onDeleteNote={onDeleteNote}
         />
       ))}
-    </div>
+    </section>
   );
 }
 
