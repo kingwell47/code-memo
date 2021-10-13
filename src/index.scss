@@ -1,6 +1,13 @@
 @use "./functions" as fnc;
 
 :root {
+  --color-primary-700: hsl(240, 9%, 23%);
+  --color-primary-600: hsl(203, 8%, 32%);
+  --color-primary-500: hsl(300, 1%, 44%);
+  --color-primary-200: hsl(337, 15%, 63%);
+  --color-primary-100: hsl(232, 48%, 88%);
+
+  --font: "Karla", sans-serif;
 }
 
 html {
@@ -15,10 +22,18 @@ html {
 }
 
 body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   padding: 0;
   margin: 0;
   font-size: fnc.rem(16);
   line-height: 1.1;
+  font-family: var(--font);
+  background-color: var(--color-primary-700);
+}
+
+.App {
 }
 
 a,

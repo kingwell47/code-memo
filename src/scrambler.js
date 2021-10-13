@@ -1,6 +1,7 @@
 //scrambler should scramble all the text in the note, no matter the passcode given
 
 export function scrambler(word, number) {
+  if (!number) return;
   const min = 33;
   const max = 126;
 
@@ -20,6 +21,7 @@ export function scrambler(word, number) {
 }
 
 export function unScrambler(word, number) {
+  if (!number) return;
   const min = 33;
   const max = 126;
 

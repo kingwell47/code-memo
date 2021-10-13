@@ -22,10 +22,7 @@ function GetPasscode({
   };
 
   const handleDelete = () => {
-    if (displayCode.length <= 0) return;
-    let num = displayCode;
-    num = num.slice(0, -1);
-    setDisplayCode(num);
+    setDisplayCode("");
   };
 
   const handleSubmit = () => {
@@ -35,8 +32,15 @@ function GetPasscode({
   };
 
   const handleReset = () => {
-    removePassCode();
-    removeRandomCode();
+    if (
+      window.confirm(
+        "Resetting will cause all notes to be unreadable. Are you sure?"
+      )
+    ) {
+      removePassCode();
+      removeRandomCode();
+    }
+    setDisplayCode("");
   };
 
   return (
@@ -44,10 +48,9 @@ function GetPasscode({
       <input
         className='keypad__display'
         type='password'
-        name=''
-        id=''
+        title='passcode'
         value={displayCode}
-        disabled
+        readOnly
       />
       <div className='keypad__keys'>
         {digits.map((digit) => (
@@ -60,7 +63,7 @@ function GetPasscode({
           </button>
         ))}
         <button className='keypad__key delete' onClick={handleDelete}>
-          Del
+          x
         </button>
         <button
           className='keypad__key zero'
@@ -69,7 +72,7 @@ function GetPasscode({
           0
         </button>
         <button className='keypad__key submit' onClick={handleSubmit}>
-          Submit
+          ✓
         </button>
       </div>
       <button className='keypad__reset' onClick={handleReset}>

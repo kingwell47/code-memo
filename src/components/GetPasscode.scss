@@ -5,37 +5,61 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding-top: fnc.rem(24);
 
   &__display {
+    background-color: var(--color-primary-600);
+    border: none;
+    width: fnc.rem(300);
+    height: fnc.rem(75);
+    font-size: fnc.rem(32);
+    text-align: center;
+    border-radius: fnc.rem(15);
   }
 
   &__keys {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(4, 1fr);
-    grid-template-areas:
-      "number number number"
-      "number number number"
-      "number number number"
-      "delete zero submit";
+    gap: fnc.rem(8);
+    margin-top: fnc.rem(16);
   }
 
   &__key {
-    grid-area: "number";
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: fnc.rem(100);
+    aspect-ratio: 2.5;
+    border-radius: 50%;
+    background-color: var(--color-primary-100);
+    border: none;
+    font-size: fnc.rem(24);
+    font-family: inherit;
+    padding: 0;
 
     &.zero {
-      grid-area: "zero";
     }
 
     &.delete {
-      grid-area: "delete";
     }
 
     &.submit {
-      grid-area: "submit";
     }
   }
 
   &__reset {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: fnc.rem(20);
+    width: fnc.rem(100);
+    background-color: var(--color-primary-200);
+    border-radius: fnc.rem(25);
+    border: none;
+    font-size: fnc.rem(24);
+    font-family: inherit;
+    color: red;
+    padding: 0;
   }
 }
