@@ -49,16 +49,18 @@ function Note({ note, onEditNote, onDeleteNote, keyNumber }) {
           <p className='notes__note_text'>
             {unScrambler(note.text, keyNumber)}
           </p>
-          <button
-            className='notes__button delete'
-            onClick={() => onDeleteNote(note.id)}>
-            Delete Note
-          </button>
-          <button
-            className='notes__button edit'
-            onClick={() => setEditing(true)}>
-            Edit Note
-          </button>
+          <div className='button_wrapper'>
+            <button
+              className='notes__button edit'
+              onClick={() => setEditing(true)}>
+              Edit Note
+            </button>
+            <button
+              className='notes__button delete'
+              onClick={() => onDeleteNote(note.id)}>
+              Delete Note
+            </button>
+          </div>
         </div>
       )}
     </div>

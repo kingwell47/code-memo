@@ -14,28 +14,42 @@
     width: 100%;
     display: flex;
     justify-content: space-between;
+    align-items: center;
   }
 
   &__underbar {
     width: 100%;
     margin-top: fnc.rem(16);
+    margin-bottom: fnc.rem(16);
     display: flex;
+    justify-content: space-between;
   }
 
   &__title {
     color: var(--color-primary-200);
+    font-size: fnc.rem(40);
   }
 
   &__subtitle {
+    color: var(--color-primary-100);
   }
 
   &__button {
     font-family: inherit;
     font-size: fnc.rem(20);
+    cursor: pointer;
     &.new {
+      font-size: fnc.rem(32);
+      color: var(--color-primary-100);
+      background-color: var(--color-primary-500);
+      border: none;
     }
 
     &.logout {
+      background-color: var(--color-primary-100);
+      border: none;
+      border-radius: fnc.rem(10);
+      padding: fnc.rem(10);
     }
 
     &.add {
@@ -73,6 +87,14 @@
   }
 
   &__note {
+    width: 100%;
+    background-color: var(--color-primary-600);
+    padding: fnc.rem(8);
+    border-radius: fnc.rem(8);
+
+    &:not(:last-child) {
+      margin-bottom: fnc.rem(8);
+    }
     &_editing {
       &_title {
       }
@@ -82,15 +104,34 @@
     }
 
     &_content {
+      display: flex;
+      flex-direction: column;
+
+      * + * {
+        margin-top: fnc.rem(8);
+      }
     }
 
     &_date {
+      align-self: flex-end;
     }
 
     &_title {
+      font-size: fnc.rem(32);
     }
 
     &_text {
+      font-size: fnc.rem(24);
+    }
+
+    .button_wrapper {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      * + * {
+        margin: 0;
+      }
     }
   }
 }

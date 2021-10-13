@@ -54,7 +54,7 @@ function NoteList({ passCode, randomCode, removePassCode }) {
         <h2 className='notes__subtitle'>Notes</h2>
         <button
           className='notes__button new'
-          onClick={() => setAddingNote(true)}>
+          onClick={() => setAddingNote(!addingNote)}>
           +
         </button>
       </div>
@@ -73,9 +73,16 @@ function NoteList({ passCode, randomCode, removePassCode }) {
             name='newNote'
             placeholder='Put text here...'
           />
-          <button className='notes__button add' onClick={onAddNote}>
-            Add Note
-          </button>
+          <div className='button_wrapper'>
+            <button className='notes__button add' onClick={onAddNote}>
+              Add Note
+            </button>
+            <button
+              className='notes__button close'
+              onClick={() => setAddingNote(false)}>
+              Close
+            </button>
+          </div>
         </div>
       )}
       {notes.map((note) => (
