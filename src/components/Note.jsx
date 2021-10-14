@@ -39,10 +39,10 @@ function Note({ note, onEditNote, onDeleteNote, keyNumber }) {
           />
           <div className='button_wrapper'>
             <button className='notes__button submit' onClick={submitEdit}>
-              Submit
+              <i class='fas fa-check' />
             </button>
             <button className='notes__button submit' onClick={cancelEdit}>
-              Cancel
+              <i class='fas fa-times' />
             </button>
           </div>
         </div>
@@ -64,12 +64,12 @@ function Note({ note, onEditNote, onDeleteNote, keyNumber }) {
             <button
               className='notes__button edit'
               onClick={() => setEditing(true)}>
-              Edit Note
+              <i class='fas fa-edit' />
             </button>
             <button
               className='notes__button delete'
               onClick={() => onDeleteNote(note.id)}>
-              Delete Note
+              <i class='fas fa-trash-alt' />
             </button>
           </div>
         </div>

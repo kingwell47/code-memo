@@ -47,7 +47,7 @@ function NoteList({ passCode, randomCode, removePassCode }) {
       <div className='notes__topbar'>
         <h1 className='notes__title'>Code Memo</h1>
         <button className='notes__button logout' onClick={removePassCode}>
-          Log-out
+          <i class='fas fa-sign-out-alt' />
         </button>
       </div>
       <div className='notes__underbar'>
@@ -55,7 +55,7 @@ function NoteList({ passCode, randomCode, removePassCode }) {
         <button
           className='notes__button new'
           onClick={() => setAddingNote(!addingNote)}>
-          +
+          <i class='fas fa-plus' />
         </button>
       </div>
       {addingNote && (
@@ -75,12 +75,12 @@ function NoteList({ passCode, randomCode, removePassCode }) {
           />
           <div className='button_wrapper'>
             <button className='notes__button add' onClick={onAddNote}>
-              Add Note
+              <i class='fas fa-check' />
             </button>
             <button
               className='notes__button close'
               onClick={() => setAddingNote(false)}>
-              Close
+              <i class='fas fa-times' />
             </button>
           </div>
         </div>

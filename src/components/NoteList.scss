@@ -6,19 +6,19 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  align-items: flex-start;
+  align-items: center;
   padding: fnc.rem(24);
   background-color: var(--color-primary-700);
 
   &__topbar {
-    width: 100%;
+    width: min(100%, fnc.rem(1110));
     display: flex;
     justify-content: space-between;
     align-items: center;
   }
 
   &__underbar {
-    width: 100%;
+    width: min(100%, fnc.rem(1110));
     margin-top: fnc.rem(16);
     margin-bottom: fnc.rem(16);
     display: flex;
@@ -39,8 +39,11 @@
     font-family: inherit;
     font-size: fnc.rem(20);
     cursor: pointer;
+    border-radius: fnc.rem(10);
+    padding: fnc.rem(10);
+    font-size: fnc.rem(18);
+
     &.new {
-      font-size: fnc.rem(32);
       color: var(--color-primary-100);
       background-color: var(--color-primary-500);
       border: none;
@@ -68,13 +71,15 @@
 
   &__note_input_wrapper {
     display: flex;
-    width: 100%;
+    width: min(100%, fnc.rem(350));
+    height: min(100%, fnc.rem(175));
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
     align-items: flex-start;
     background-color: var(--color-primary-600);
     padding: fnc.rem(8);
     border-radius: fnc.rem(8);
+    box-shadow: var(--box-shadow);
 
     .button_wrapper {
       width: 100%;
@@ -90,38 +95,47 @@
 
   &__note_input_title {
     width: 100%;
-    font-size: fnc.rem(16);
-    padding: fnc.rem(5);
     border: none;
     border-radius: fnc.rem(5);
+    font-family: inherit;
+    font-size: fnc.rem(24);
+    padding: fnc.rem(5);
+    font-weight: 700;
   }
 
   &__note_input_text {
     width: 100%;
+    border-radius: fnc.rem(5);
+    font-family: inherit;
     font-size: fnc.rem(16);
     padding: fnc.rem(5);
     resize: none;
-    border-radius: fnc.rem(5);
   }
 
   &__note_wrapper {
     margin-top: fnc.rem(8);
-    width: 100%;
+    width: min(100%, fnc.rem(1110));
+    display: flex;
+    flex-wrap: wrap;
+    gap: fnc.rem(16);
   }
 
   &__note {
-    width: 100%;
+    width: min(100%, fnc.rem(350));
+    height: min(100%, fnc.rem(175));
     background-color: var(--color-primary-600);
     padding: fnc.rem(8);
     border-radius: fnc.rem(8);
+    box-shadow: var(--box-shadow);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 
-    &:not(:last-child) {
-      margin-bottom: fnc.rem(8);
-    }
     &_editing {
       display: flex;
       flex-direction: column;
-      justify-content: center;
+      justify-content: space-between;
+      height: 100%;
 
       &_title {
         width: 100%;
@@ -146,6 +160,8 @@
     &_content {
       display: flex;
       flex-direction: column;
+      justify-content: space-between;
+      height: 100%;
 
       * + * {
         margin-top: fnc.rem(8);
