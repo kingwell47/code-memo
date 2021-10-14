@@ -85,15 +85,17 @@ function NoteList({ passCode, randomCode, removePassCode }) {
           </div>
         </div>
       )}
-      {notes.map((note) => (
-        <Note
-          note={note}
-          key={note.id}
-          keyNumber={Math.abs(passCode - randomCode)}
-          onEditNote={onEditNote}
-          onDeleteNote={onDeleteNote}
-        />
-      ))}
+      <div className='notes__note_wrapper'>
+        {notes.map((note) => (
+          <Note
+            note={note}
+            key={note.id}
+            keyNumber={Math.abs(passCode - randomCode)}
+            onEditNote={onEditNote}
+            onDeleteNote={onDeleteNote}
+          />
+        ))}
+      </div>
     </section>
   );
 }

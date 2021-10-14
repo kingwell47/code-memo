@@ -23,6 +23,7 @@
     margin-bottom: fnc.rem(16);
     display: flex;
     justify-content: space-between;
+    align-items: center;
   }
 
   &__title {
@@ -71,12 +72,28 @@
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
+    background-color: var(--color-primary-600);
+    padding: fnc.rem(8);
+    border-radius: fnc.rem(8);
+
+    .button_wrapper {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      * + * {
+        margin: 0;
+      }
+    }
   }
 
   &__note_input_title {
     width: 100%;
     font-size: fnc.rem(16);
     padding: fnc.rem(5);
+    border: none;
+    border-radius: fnc.rem(5);
   }
 
   &__note_input_text {
@@ -84,6 +101,12 @@
     font-size: fnc.rem(16);
     padding: fnc.rem(5);
     resize: none;
+    border-radius: fnc.rem(5);
+  }
+
+  &__note_wrapper {
+    margin-top: fnc.rem(8);
+    width: 100%;
   }
 
   &__note {
@@ -96,10 +119,27 @@
       margin-bottom: fnc.rem(8);
     }
     &_editing {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+
       &_title {
+        width: 100%;
+        border: none;
+        border-radius: fnc.rem(5);
+        font-family: inherit;
+        font-size: fnc.rem(24);
+        padding: fnc.rem(5);
+        font-weight: 700;
       }
 
       &_text {
+        width: 100%;
+        border-radius: fnc.rem(5);
+        font-family: inherit;
+        font-size: fnc.rem(16);
+        padding: fnc.rem(5);
+        resize: none;
       }
     }
 

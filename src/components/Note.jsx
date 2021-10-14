@@ -14,6 +14,12 @@ function Note({ note, onEditNote, onDeleteNote, keyNumber }) {
     textRef.current.value = "";
   };
 
+  const cancelEdit = () => {
+    setEditing(false);
+    titleRef.current.value = "";
+    textRef.current.value = "";
+  };
+
   return (
     <div className='notes__note'>
       {editing ? (
@@ -31,9 +37,14 @@ function Note({ note, onEditNote, onDeleteNote, keyNumber }) {
             name='newNote'
             defaultValue={unScrambler(note.text, keyNumber)}
           />
-          <button className='notes__button submit' onClick={submitEdit}>
-            Submit Edit
-          </button>
+          <div className='button_wrapper'>
+            <button className='notes__button submit' onClick={submitEdit}>
+              Submit
+            </button>
+            <button className='notes__button submit' onClick={cancelEdit}>
+              Cancel
+            </button>
+          </div>
         </div>
       ) : (
         <div className='notes__note_content'>
