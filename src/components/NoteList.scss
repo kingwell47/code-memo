@@ -116,6 +116,7 @@
     margin-top: fnc.rem(8);
     width: min(100%, fnc.rem(1110));
     display: flex;
+    justify-content: center;
     flex-wrap: wrap;
     gap: fnc.rem(16);
   }
@@ -123,7 +124,7 @@
   &__note {
     width: min(100%, fnc.rem(350));
     height: min(100%, fnc.rem(175));
-    background-color: var(--color-primary-600);
+    background-color: var(--color-primary-200);
     padding: fnc.rem(8);
     border-radius: fnc.rem(8);
     box-shadow: var(--box-shadow);
