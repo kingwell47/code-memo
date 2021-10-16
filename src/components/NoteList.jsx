@@ -68,7 +68,7 @@ function NoteList({ passCode, randomCode, removePassCode }) {
           className='notes__button logout'
           onClick={removePassCode}
           title='Log-out'>
-          <i class='fas fa-sign-out-alt' />
+          <i className='fas fa-sign-out-alt' />
         </button>
       </div>
       <div className='notes__underbar'>
@@ -77,7 +77,7 @@ function NoteList({ passCode, randomCode, removePassCode }) {
           className='notes__button new'
           onClick={() => setAddingNote(!addingNote)}
           title='Add new note'>
-          <i class='fas fa-plus' />
+          <i className='fas fa-plus' />
         </button>
       </div>
       {fadeIn(
@@ -102,12 +102,12 @@ function NoteList({ passCode, randomCode, removePassCode }) {
                   className='notes__button add'
                   onClick={onAddNote}
                   title='add note'>
-                  <i class='fas fa-check' />
+                  <i className='fas fa-check' />
                 </button>
                 <button
                   className='notes__button close'
                   onClick={() => setAddingNote(false)}>
-                  <i class='fas fa-times' />
+                  <i className='fas fa-times' />
                 </button>
               </div>
             </animated.div>

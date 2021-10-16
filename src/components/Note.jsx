@@ -42,13 +42,13 @@ function Note({ note, onEditNote, onDeleteNote, keyNumber }) {
               className='notes__button submit'
               onClick={submitEdit}
               title='Submit edit'>
-              <i class='fas fa-check' />
+              <i className='fas fa-check' />
             </button>
             <button
               className='notes__button cancel'
               onClick={cancelEdit}
               title='Cancel edit'>
-              <i class='fas fa-times' />
+              <i className='fas fa-times' />
             </button>
           </div>
         </div>
@@ -71,13 +71,13 @@ function Note({ note, onEditNote, onDeleteNote, keyNumber }) {
               className='notes__button edit'
               onClick={() => setEditing(true)}
               title='Edit note'>
-              <i class='fas fa-edit' />
+              <i className='fas fa-edit' />
             </button>
             <button
               className='notes__button delete'
               onClick={() => onDeleteNote(note.id)}
               title='Delete note'>
-              <i class='fas fa-trash-alt' />
+              <i className='fas fa-trash-alt' />
             </button>
           </div>
         </div>
