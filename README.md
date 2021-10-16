@@ -1,70 +1,163 @@
-# Getting Started with Create React App
+# Code Memo
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## A Note App with Some Security
 
-## Available Scripts
+**Disclaimer**
 
-In the project directory, you can run:
+- This app is not intended to be used to protect any sensitive information.
+- It uses a very simple cipher to encrypt the notes.
+- Due to how it works, anyone who has access to the computer can reset the app or delete, add or edit notes.
+- It's just a fun little side project, nothing more.
 
-### `npm start`
+**End Disclaimer**
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+This is an app that seeks to replicate the "Code Memo" functionality of old Ericsson phones, specifically the T39 model.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+It's basically a note app with some security, though it is obviously not as secure as a true password protected app.
 
-### `npm test`
+## Table of contents
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- [Overview](#overview)
+  - [The challenge](#the-challenge)
+  - [Screenshots](#screenshots)
+  - [Links](#links)
+- [My process](#my-process)
+  - [Built with](#built-with)
+  - [What I learned](#what-i-learned)
+  - [Continued development](#continued-development)
+  - [Useful resources](#useful-resources)
+- [Author](#author)
+- [Acknowledgments](#acknowledgments)
 
-### `npm run build`
+## Overview
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### The challenge
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Users should be able to:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- Initialize the app with a six (6) digit code.
+- Add, edit, or delete notes that will be stored in local storage.
+- Logout back to the numberpad screen.
+- The current passcode is saved in session storage, so it will be asked again if the broswer is closed.
+- Using an incorrect code will still grant access to the notes, but will have all the note content ciphered.
+- Notes will only be readable if the correct code is entered.
+- Resetting the app will not delete the notes, but will make existing notes unreadable.
 
-### `npm run eject`
+### Screenshots
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+![](./Screenshot.png)
+![](./Screenshot2.png)
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Links
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+- Live Site URL: https://kingwell47.github.io/code-memo/
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## My process
 
-## Learn More
+### Built with
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- Semantic HTML5 markup
+- CSS custom properties
+- SCSS
+- JavaScript
+- Flexbox
+- CSS Grid
+- Mobile-first workflow
+- [React](https://reactjs.org/) - JS library
+- [React-spring](https://react-spring.io/) - React animations
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### What I learned
 
-### Code Splitting
+Using a simple cipher to encrypt the text before storing it in Local Storage:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+```js
+export function scrambler(word, number) {
+  if (!number) return;
+  const min = 33;
+  const max = 126;
 
-### Analyzing the Bundle Size
+  const leftOver = number % (max - min);
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+  return word.replace(/[^\s]/g, (x) => {
+    let diff = 0;
+    let currentVal = x.charCodeAt(0);
+    if (currentVal + leftOver > max) {
+      diff = min + currentVal + leftOver - max;
+    } else {
+      diff = currentVal + leftOver;
+    }
 
-### Making a Progressive Web App
+    return String.fromCharCode(diff);
+  });
+}
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+Requiring the passcode to enter the list of notes:
 
-### Advanced Configuration
+```jsx
+<main className='App'>
+  {passCode ? (
+    <NoteList
+      passCode={passCode}
+      randomCode={randomCode}
+      removePassCode={removePassCode}
+    />
+  ) : (
+    <>
+      <GetPasscode
+        setPassCode={setPassCode}
+        removePassCode={removePassCode}
+        randomCode={randomCode}
+        getRandomCode={getRandomCode}
+        removeRandomCode={removeRandomCode}
+      />
+      <Instructions />
+    </>
+  )}
+</main>
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+Using React-spring for more animations:
 
-### Deployment
+```jsx
+{
+  transitions(
+    (styles, item) =>
+      item && (
+        <animated.div style={styles}>
+          <Note
+            note={item}
+            key={item.id}
+            keyNumber={Math.abs(passCode - randomCode)}
+            onEditNote={onEditNote}
+            onDeleteNote={onDeleteNote}
+          />
+        </animated.div>
+      )
+  );
+}
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+### Continued development
 
-### `npm run build` fails to minify
+I need to improve the cipher to use an actual Encryption Algorithm.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+There is also some weirdness with the animations when editing a note, but it ultimately does not affect functionality.
+
+### Useful resources
+
+- [Usefull Custom React Hooks by WebDevSimplified](https://github.com/WebDevSimplified/useful-custom-react-hooks) - Great custom hooks that are easy to implement.
+- [Build a Notes App with React.js (for Beginners) by James Grimshaw](https://youtu.be/ulOKYl5sHGk) - A great resource for making a basic notes app.
+- [React Notes App Tutorial from Scratch | A CSS and React Project you can add to your Portfolio! by Chris Blakely](https://youtu.be/8KB3DHI-QbM) - Another great tutorial for making a notes app in React.
+- [Javascript Coding Challenge #16: Caesars Cipher (Freecodecamp) by whatsdev](https://youtu.be/4mp-6a3vARU) - A tutorial for implementing a simple cipher into the app.
+
+## Author
+
+- Website - [Joel P. Doctor](https://joeldoctor.com/)
+- Frontend Mentor - [@kingwell47](https://www.frontendmentor.io/profile/kingwell47)
+- Twitter - [@kingwell47](https://www.twitter.com/kingwell47)
+- LinkedIn - [Joel P. Doctor](https://www.linkedin.com/in/joel-d-05854919/)
+
+## Acknowledgments
+
+Thanks to Ms. Jessica Chan (Coder Coder) and all the other YouTube creators making their knowledge available!
