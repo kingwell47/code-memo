@@ -2,8 +2,9 @@ import React, { useState, useRef } from "react";
 import { nanoid } from "nanoid";
 import { useTransition, animated } from "react-spring";
 import Note from "./Note";
-import { useLocalStorage } from "../useStorage";
-import { scrambler } from "../scrambler";
+import { useLocalStorage } from "../hooks/useStorage";
+import { scrambler } from "../hooks/scrambler";
+import logo from "../logo.png";
 import "./NoteList.scss";
 
 function NoteList({ passCode, randomCode, removePassCode }) {
@@ -62,7 +63,11 @@ function NoteList({ passCode, randomCode, removePassCode }) {
     <section className='notes'>
       <div className='notes__topbar'>
         <h1 className='notes__title'>Code Memo</h1>
-        <button className='notes__button logout' onClick={removePassCode}>
+        <img className='notes__logo' src={logo} alt='' />
+        <button
+          className='notes__button logout'
+          onClick={removePassCode}
+          title='Log-out'>
           <i class='fas fa-sign-out-alt' />
         </button>
       </div>
@@ -70,7 +75,8 @@ function NoteList({ passCode, randomCode, removePassCode }) {
         <h2 className='notes__subtitle'>Notes</h2>
         <button
           className='notes__button new'
-          onClick={() => setAddingNote(!addingNote)}>
+          onClick={() => setAddingNote(!addingNote)}
+          title='Add new note'>
           <i class='fas fa-plus' />
         </button>
       </div>

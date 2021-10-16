@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import { unScrambler } from "../scrambler";
+import { unScrambler } from "../hooks/scrambler";
 
 function Note({ note, onEditNote, onDeleteNote, keyNumber }) {
   const [editing, setEditing] = useState(false);
@@ -38,10 +38,16 @@ function Note({ note, onEditNote, onDeleteNote, keyNumber }) {
             defaultValue={unScrambler(note.text, keyNumber)}
           />
           <div className='button_wrapper'>
-            <button className='notes__button submit' onClick={submitEdit}>
+            <button
+              className='notes__button submit'
+              onClick={submitEdit}
+              title='Submit edit'>
               <i class='fas fa-check' />
             </button>
-            <button className='notes__button submit' onClick={cancelEdit}>
+            <button
+              className='notes__button cancel'
+              onClick={cancelEdit}
+              title='Cancel edit'>
               <i class='fas fa-times' />
             </button>
           </div>
@@ -63,12 +69,14 @@ function Note({ note, onEditNote, onDeleteNote, keyNumber }) {
           <div className='button_wrapper'>
             <button
               className='notes__button edit'
-              onClick={() => setEditing(true)}>
+              onClick={() => setEditing(true)}
+              title='Edit note'>
               <i class='fas fa-edit' />
             </button>
             <button
               className='notes__button delete'
-              onClick={() => onDeleteNote(note.id)}>
+              onClick={() => onDeleteNote(note.id)}
+              title='Delete note'>
               <i class='fas fa-trash-alt' />
             </button>
           </div>

@@ -1,4 +1,4 @@
-import { useSessionStorage, useLocalStorage } from "./useStorage";
+import { useSessionStorage, useLocalStorage } from "./hooks/useStorage";
 import GetPasscode from "./components/GetPasscode";
 import NoteList from "./components/NoteList";
 

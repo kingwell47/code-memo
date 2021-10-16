@@ -61,7 +61,7 @@ function GetPasscode({
         />
         {!initialized && (
           <p className='keypad__initialization'>
-            Please input a new passcode to initialize the app
+            Please input a new 6 digit passcode to initialize the app
           </p>
         )}
         <div className='keypad__keys'>
