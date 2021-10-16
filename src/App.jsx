@@ -1,6 +1,7 @@
 import { useSessionStorage, useLocalStorage } from "./hooks/useStorage";
 import GetPasscode from "./components/GetPasscode";
 import NoteList from "./components/NoteList";
+import Instructions from "./components/Instructions";
 
 function App() {
   const [passCode, setPassCode, removePassCode] = useSessionStorage("pass");
@@ -20,13 +21,16 @@ function App() {
           removePassCode={removePassCode}
         />
       ) : (
-        <GetPasscode
-          setPassCode={setPassCode}
-          removePassCode={removePassCode}
-          randomCode={randomCode}
-          getRandomCode={getRandomCode}
-          removeRandomCode={removeRandomCode}
-        />
+        <>
+          <GetPasscode
+            setPassCode={setPassCode}
+            removePassCode={removePassCode}
+            randomCode={randomCode}
+            getRandomCode={getRandomCode}
+            removeRandomCode={removeRandomCode}
+          />
+          <Instructions />
+        </>
       )}
     </main>
   );

@@ -1,0 +1,30 @@
+@use "../functions" as fnc;
+
+.instructions {
+  width: min(100%, fnc.rem(350));
+  padding: fnc.rem(25);
+  //   background-color: var(--color-primary-600);
+
+  &__title {
+    text-align: center;
+    font-size: fnc.rem(32);
+    color: var(--color-primary-100);
+  }
+
+  &__disclaimer {
+    color: var(--red);
+    background-color: var(--color-primary-200);
+    padding: fnc.rem(5);
+    border-radius: fnc.rem(15);
+    margin: fnc.rem(8) 0;
+  }
+
+  &__how {
+    font-size: fnc.rem(20);
+  }
+
+  &__credit {
+    text-align: center;
+    font-weight: 700;
+  }
+}
