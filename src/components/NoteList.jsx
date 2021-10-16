@@ -1,5 +1,6 @@
 import React, { useState, useRef } from "react";
 import { nanoid } from "nanoid";
+import { useTransition, animated } from "react-spring";
 import Note from "./Note";
 import { useLocalStorage } from "../useStorage";
 import { scrambler } from "../scrambler";
@@ -10,6 +11,19 @@ function NoteList({ passCode, randomCode, removePassCode }) {
   const [addingNote, setAddingNote] = useState(false);
   const titleRef = useRef();
   const textRef = useRef();
+
+  const transitions = useTransition(notes, {
+    from: { opacity: 0 },
+    enter: { opacity: 1 },
+    leave: { opacity: 0 },
+    delay: 200,
+  });
+
+  const fadeIn = useTransition(addingNote, {
+    from: { opacity: 0 },
+    enter: { opacity: 1 },
+    leave: { opacity: 0 },
+  });
 
   const onAddNote = () => {
     let newNote = {
@@ -26,16 +40,18 @@ function NoteList({ passCode, randomCode, removePassCode }) {
   };
 
   const onEditNote = (id, newTitle, newText) => {
-    const allNotes = [...notes];
-    const toEditIndex = allNotes.map((item) => item.id).indexOf(id);
+    const toEditIndex = notes.map((item) => item.id).indexOf(id);
     const toEdit = {
       id: id,
       title: scrambler(newTitle, Math.abs(passCode - randomCode)),
       text: scrambler(newText, Math.abs(passCode - randomCode)),
       date: Date.now(),
     };
-    allNotes[toEditIndex] = toEdit;
-    setNotes(allNotes);
+    setNotes((a) => [
+      ...a.slice(0, toEditIndex),
+      toEdit,
+      ...a.slice(toEditIndex + 1, a.length),
+    ]);
   };
 
   const onDeleteNote = (idToDelete) => {
@@ -58,43 +74,54 @@ function NoteList({ passCode, randomCode, removePassCode }) {
           <i class='fas fa-plus' />
         </button>
       </div>
-      {addingNote && (
-        <div className='notes__note_input_wrapper'>
-          <input
-            ref={titleRef}
-            className='notes__note_input_title'
-            type='text'
-            name='newNote'
-            placeholder='Put title here...'
-          />
-          <textarea
-            ref={textRef}
-            className='notes__note_input_text'
-            name='newNote'
-            placeholder='Put text here...'
-          />
-          <div className='button_wrapper'>
-            <button className='notes__button add' onClick={onAddNote}>
-              <i class='fas fa-check' />
-            </button>
-            <button
-              className='notes__button close'
-              onClick={() => setAddingNote(false)}>
-              <i class='fas fa-times' />
-            </button>
-          </div>
-        </div>
+      {fadeIn(
+        (styles, item) =>
+          item && (
+            <animated.div className='notes__note_input_wrapper' style={styles}>
+              <input
+                ref={titleRef}
+                className='notes__note_input_title'
+                type='text'
+                name='newNote'
+                placeholder='Put title here...'
+              />
+              <textarea
+                ref={textRef}
+                className='notes__note_input_text'
+                name='newNote'
+                placeholder='Put text here...'
+              />
+              <div className='button_wrapper'>
+                <button
+                  className='notes__button add'
+                  onClick={onAddNote}
+                  title='add note'>
+                  <i class='fas fa-check' />
+                </button>
+                <button
+                  className='notes__button close'
+                  onClick={() => setAddingNote(false)}>
+                  <i class='fas fa-times' />
+                </button>
+              </div>
+            </animated.div>
+          )
       )}
       <div className='notes__note_wrapper'>
-        {notes.map((note) => (
-          <Note
-            note={note}
-            key={note.id}
-            keyNumber={Math.abs(passCode - randomCode)}
-            onEditNote={onEditNote}
-            onDeleteNote={onDeleteNote}
-          />
-        ))}
+        {transitions(
+          (styles, item) =>
+            item && (
+              <animated.div style={styles}>
+                <Note
+                  note={item}
+                  key={item.id}
+                  keyNumber={Math.abs(passCode - randomCode)}
+                  onEditNote={onEditNote}
+                  onDeleteNote={onDeleteNote}
+                />
+              </animated.div>
+            )
+        )}
       </div>
     </section>
   );

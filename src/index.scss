@@ -6,6 +6,8 @@
   --color-primary-500: hsl(309, 6%, 58%);
   --color-primary-200: hsl(11, 24%, 72%);
   --color-primary-100: hsl(21, 35%, 92%);
+  --green: hsl(138, 100%, 27%);
+  --red: hsl(0, 100%, 50%);
 
   --font: "Karla", sans-serif;
   --box-shadow: 0px 0px 4px 5px rgba(0, 0, 0, 0.25);
@@ -14,6 +16,11 @@
 html {
   font-size: 100%;
   box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
 }
 
 *,
@@ -73,11 +80,6 @@ p {
 
 img {
   display: block;
-}
-
-.App {
-  width: min(100vw, 1440px);
-  overflow: hidden;
 }
 
 button {

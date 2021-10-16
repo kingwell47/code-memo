@@ -23,6 +23,7 @@ function App() {
         <GetPasscode
           setPassCode={setPassCode}
           removePassCode={removePassCode}
+          randomCode={randomCode}
           getRandomCode={getRandomCode}
           removeRandomCode={removeRandomCode}
         />

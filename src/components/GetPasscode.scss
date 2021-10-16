@@ -11,6 +11,11 @@
   padding: fnc.rem(24);
   background-color: var(--color-primary-700);
 
+  &__initialization {
+    margin-top: fnc.rem(8);
+    color: var(--green);
+  }
+
   &__display {
     background-color: var(--color-primary-600);
     border: none;
@@ -45,13 +50,12 @@
     padding: 0;
     cursor: pointer;
 
-    &.zero {
-    }
-
     &.delete {
+      color: var(--red);
     }
 
     &.submit {
+      color: var(--green);
     }
   }
 
@@ -66,7 +70,7 @@
     border: none;
     font-size: fnc.rem(24);
     font-family: inherit;
-    color: red;
+    color: var(--red);
     padding: 0;
   }
 }

@@ -72,7 +72,7 @@
   &__note_input_wrapper {
     display: flex;
     width: min(100%, fnc.rem(350));
-    height: min(100%, fnc.rem(175));
+    height: auto;
     flex-direction: column;
     justify-content: space-between;
     align-items: flex-start;
@@ -106,24 +106,26 @@
   &__note_input_text {
     width: 100%;
     border-radius: fnc.rem(5);
+    margin-top: fnc.rem(8);
+    margin-bottom: fnc.rem(8);
     font-family: inherit;
     font-size: fnc.rem(16);
     padding: fnc.rem(5);
-    resize: none;
+    resize: vertical;
   }
 
   &__note_wrapper {
     margin-top: fnc.rem(8);
     width: min(100%, fnc.rem(1110));
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: auto;
     gap: fnc.rem(16);
   }
 
   &__note {
     width: min(100%, fnc.rem(350));
-    height: min(100%, fnc.rem(175));
+    height: auto;
     background-color: var(--color-primary-200);
     padding: fnc.rem(8);
     border-radius: fnc.rem(8);
@@ -154,7 +156,7 @@
         font-family: inherit;
         font-size: fnc.rem(16);
         padding: fnc.rem(5);
-        resize: none;
+        resize: vertical;
       }
     }
 
